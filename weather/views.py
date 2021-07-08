@@ -21,7 +21,7 @@ def detail(request, **kwargs):
         }
     elif city and state:
         payload = {
-            'q': f'{city.title()},{state.lower()}',
+            'q': f'{city},us-{state}',
             'appid': api_token
         }
         print(payload)
