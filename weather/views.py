@@ -1,12 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from django.views.generic.edit import FormView
 
 from dotenv import load_dotenv, find_dotenv
 import os, requests
 
+from .forms import ZipCodeForm
+
 # Create your views here.
+
+class indexForm(FormView):
+    template_name = 'weather/index.html'
+    form_class = ZipCodeForm
+
+    def form_valid(self, form):
+        zipcode = form.cleaned_data.get('zipcode')
+        return redirect('weather:detail', zipcode)
+
 def index(request):
-    return HttpResponse('/weather/')
+    # return HttpResponse('/weather/')
+    return render(request, 'weather/index.html')
 
 def detail(request, **kwargs):
     zipcode = kwargs.get('zipcode', None)
