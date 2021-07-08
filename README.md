@@ -12,7 +12,7 @@ To Do List:
 
 - [x] commit empty django project
 
-- [ ] create a `weather` app in the project
+- [x] create a `weather` app in the project
 
 - [ ] set up a data model to hold user submitted weather data 
 
@@ -20,4 +20,10 @@ To Do List:
 
 - [ ] create a /city/state/ route to allow users to get weather by city, state
 
+- [ ] build a basic frontend to display the results
+
+- [ ] add basic signin functionality
+
 - [ ] create a /weather-report/ route to allow users to enter the weather at a location
+
+- [ ] build a basic frontend for user input
