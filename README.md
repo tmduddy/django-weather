@@ -14,7 +14,7 @@ To Do List:
 
 - [x] create a `weather` app in the project
 
-- [ ] create a /zip/ route to allow users to get weather by zip
+- [x] create a /zip/ route to allow users to get weather by zip
 
 - [ ] create a /city/state/ route to allow users to get weather by city, state
 
