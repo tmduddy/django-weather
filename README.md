@@ -10,7 +10,7 @@ To Do List:
     - `pyenv`, `venv`, `pip install django`
 - [x] initialize git repo
 
-- [ ] commit empty django project
+- [x] commit empty django project
 
 - [ ] create a `weather` app in the project
 
