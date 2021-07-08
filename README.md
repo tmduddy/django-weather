@@ -16,7 +16,9 @@ To Do List:
 
 - [x] create a /zip/ route to allow users to get weather by zip
 
-- [ ] create a /city/state/ route to allow users to get weather by city, state
+- [x] create a /city/state/ route to allow users to get weather by city, state
+
+- [ ] build a basic frontend for users to search from
 
 - [ ] build a basic frontend to display the results
 
