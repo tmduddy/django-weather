@@ -14,8 +14,6 @@ To Do List:
 
 - [x] create a `weather` app in the project
 
-- [ ] set up a data model to hold user submitted weather data 
-
 - [ ] create a /zip/ route to allow users to get weather by zip
 
 - [ ] create a /city/state/ route to allow users to get weather by city, state
@@ -23,6 +21,8 @@ To Do List:
 - [ ] build a basic frontend to display the results
 
 - [ ] add basic signin functionality
+
+- [ ] set up a data model to hold user submitted weather data 
 
 - [ ] create a /weather-report/ route to allow users to enter the weather at a location
 
