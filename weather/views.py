@@ -1,25 +1,57 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, View
 
 from dotenv import load_dotenv, find_dotenv
 import os, requests
 
-from .forms import ZipCodeForm
+from .forms import ZipCodeSearchForm, CityStateSearchForm
 
 # Create your views here.
 
-class indexForm(FormView):
+class IndexForm(View):
     template_name = 'weather/index.html'
-    form_class = ZipCodeForm
 
-    def form_valid(self, form):
-        zipcode = form.cleaned_data.get('zipcode')
-        return redirect('weather:detail', zipcode)
+    def get(self, request):
+        zip_form = ZipCodeSearchForm(prefix='zip_form')
+        city_state_form = CityStateSearchForm(prefix='city_state_form')
 
-def index(request):
-    # return HttpResponse('/weather/')
-    return render(request, 'weather/index.html')
+        return render(request, 'weather/index.html', {'zip_form': zip_form, 'city_state_form': city_state_form})
+    
+    def post(self, request):
+        zip_form = ZipCodeSearchForm(prefix='zip_form')
+        city_state_form = CityStateSearchForm(prefix='city_state_form')
+
+        action = self.request.POST.get('action', False)
+
+        if action == 'zip_form':
+            zip_form = ZipCodeSearchForm(request.POST, prefix='zip_form')
+            if zip_form.is_valid():
+                zipcode = zip_form.cleaned_data['zipcode']
+                return redirect('weather:detail', zipcode)
+        elif action == 'city_state_form':
+            city_state_form = CityStateSearchForm(request.POST, prefix='city_state_form')
+            if city_state_form.is_valid():
+                city = city_state_form.cleaned_data['city']
+                state = city_state_form.cleaned_data['state']
+                return redirect('weather:detail', city, state)
+        
+
+    # def form_valid(self, form):
+    #     zipcode = form.cleaned_data.get('zipcode', False)
+    #     city = form.cleaned_data.get('city', False)
+    #     state = form.cleaned_data.get('state', False)
+    #     if zipcode:
+    #         return redirect('weather:detail', zipcode)
+    #     elif city and state:
+    #         return redirect('weather:detail', city, state)
+    #     else:
+    #         return redirect('weather:index')
+        
+
+# def index(request):
+#     # return HttpResponse('/weather/')
+#     return render(request, 'weather/index.html')
 
 def detail(request, **kwargs):
     zipcode = kwargs.get('zipcode', None)

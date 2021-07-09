@@ -11,18 +11,22 @@
     <h1>Search for weather by Zip Code or City and State</h1>
 
     <form method="post">
+        <!-- <input type='text' name='zipcode' id='zipcode' placeholder="Zipcode">
+        <br> -->
         {% csrf_token %}
-        <input type='text' name='zipcode' id='zipcode' placeholder="Zipcode">
-        <br>
-        <button type="submit">Search by Zipcode</button>
+        {{ zip_form.as_p }}
+        <button type="submit" name="action" value="zip_form">Search by Zipcode</button>
     </form>
     <br><br>
-    <form>
-        <input type='text' name='city' id='city' placeholder="City">
+    <form method="post">
+        
+        <!-- <input type='text' name='city' id='city' placeholder="City">
         <br>
         <input type='text' name='state' id='state' placeholder="State Code">
-        <br>
-        <button type="submit">Search by City and State</button>
+        <br> -->
+        {% csrf_token %}
+        {{ city_state_form.as_p }}
+        <button type="submit" name="action" value="city_state_form">Search by City and State</button>
     </form>
 </body>
 </html>

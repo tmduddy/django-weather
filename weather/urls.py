@@ -5,7 +5,7 @@ from . import views
 app_name='weather'
 urlpatterns = [
     # /weather/
-    path('', views.index, name='index'),
+    path('', views.IndexForm.as_view(), name='index'),
     # /weather/<zip>/
     path('<int:zipcode>/', views.detail, name='detail'),
     # /weather/<city>/<state>/
