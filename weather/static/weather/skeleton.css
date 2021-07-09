@@ -416,3 +416,27 @@
   
   /* Larger than Desktop HD */
   @media (min-width: 1200px) {}
+
+  /* custom styles */
+
+  .navbar{
+    background-color: #fff; 
+    border-bottom: 1px solid grey;
+  }
+  
+  /*Floats each item to the left with padding of 14 & 16 px.
+  Removes the underline with text decoration = none.*/
+  .navbar a{
+    float: left;
+    color: grey;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /*Background color change during hover state*/
+  .navbar a:hover{
+    background-color: white;
+    color: #009cde;
+  }
+  

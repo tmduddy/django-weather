@@ -13,7 +13,9 @@ class IndexView(View):
     template_name = 'weather/index.html'
 
     def get(self, request):
-        return render(request, 'weather/index.html', {'page_title': 'Weather App - Homepage'})
+        
+        context = {}
+        return render(request, 'weather/index.html', context)
 
 class SearchForm(View):
     template_name = 'weather/search.html'
@@ -22,7 +24,6 @@ class SearchForm(View):
         zip_form = ZipCodeSearchForm(prefix='zip_form')
         city_state_form = CityStateSearchForm(prefix='city_state_form')
         context = {
-            'page_title': "Weather App - Search Page",
             'zip_form': zip_form,
             'city_state_form': city_state_form,
         }
