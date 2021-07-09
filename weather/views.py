@@ -35,23 +35,6 @@ class IndexForm(View):
                 city = city_state_form.cleaned_data['city']
                 state = city_state_form.cleaned_data['state']
                 return redirect('weather:detail', city, state)
-        
-
-    # def form_valid(self, form):
-    #     zipcode = form.cleaned_data.get('zipcode', False)
-    #     city = form.cleaned_data.get('city', False)
-    #     state = form.cleaned_data.get('state', False)
-    #     if zipcode:
-    #         return redirect('weather:detail', zipcode)
-    #     elif city and state:
-    #         return redirect('weather:detail', city, state)
-    #     else:
-    #         return redirect('weather:index')
-        
-
-# def index(request):
-#     # return HttpResponse('/weather/')
-#     return render(request, 'weather/index.html')
 
 def detail(request, **kwargs):
     zipcode = kwargs.get('zipcode', None)
@@ -59,6 +42,7 @@ def detail(request, **kwargs):
     state = kwargs.get('state', None)
 
     api_token = os.environ['WEATHER_KEY']
+    print(f'TOKEN {api_token}')
     if zipcode:
         payload = {
             'zip': f'{zipcode},us',
@@ -72,6 +56,7 @@ def detail(request, **kwargs):
         print(payload)
     else:
         return HttpResponse('gotta provide something my man')
+
     res = requests.get('http://api.openweathermap.org/data/2.5/weather', payload) 
     parsed_res = str(res)
     status = res.json()
