@@ -9,14 +9,24 @@ from .forms import ZipCodeSearchForm, CityStateSearchForm
 
 # Create your views here.
 
-class IndexForm(View):
+class IndexView(View):
     template_name = 'weather/index.html'
+
+    def get(self, request):
+        return render(request, 'weather/index.html', {'page_title': 'Weather App - Homepage'})
+
+class SearchForm(View):
+    template_name = 'weather/search.html'
 
     def get(self, request):
         zip_form = ZipCodeSearchForm(prefix='zip_form')
         city_state_form = CityStateSearchForm(prefix='city_state_form')
-
-        return render(request, 'weather/index.html', {'zip_form': zip_form, 'city_state_form': city_state_form})
+        context = {
+            'page_title': "Weather App - Search Page",
+            'zip_form': zip_form,
+            'city_state_form': city_state_form,
+        }
+        return render(request, 'weather/search.html', context)
     
     def post(self, request):
         zip_form = ZipCodeSearchForm(prefix='zip_form')
@@ -42,7 +52,6 @@ def detail(request, **kwargs):
     state = kwargs.get('state', None)
 
     api_token = os.environ['WEATHER_KEY']
-    print(f'TOKEN {api_token}')
     if zipcode:
         payload = {
             'zip': f'{zipcode},us',
