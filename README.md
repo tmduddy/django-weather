@@ -24,10 +24,12 @@ Objectives:
 
 - [x] build a basic frontend to display the results
 
-- [ ] add basic signin functionality
+- [x] create a /report-weather/ route to allow users to enter the weather at a location
+
+- [x] create a /browse-reports/ route to allow users to enter the weather at a location
 
 - [ ] set up a data model to hold user submitted weather data 
 
-- [ ] create a /weather-report/ route to allow users to enter the weather at a location
-
 - [ ] build a basic frontend for user input
+
+- [ ] add basic signin functionality so only authenticated users can submit reports
