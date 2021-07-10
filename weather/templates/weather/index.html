@@ -7,8 +7,17 @@
 {% endblock headline %}
 
 {% block content%}
-<p> From here you can navigate to the Weather Search page and find the current weather conditions at any US zipcode or
-    City, State or enter your own weather report. </p>
+<div class="row">
+  <div class="two columns">&nbsp;</div>
+  <div class="six columns">
+    <p> From here you can navigate to the Weather Search page and find the current weather conditions at any US
+      zipcode or
+      City, State or enter your own weather report. </p>
 
-<a class="button" href="{% url "weather:search" %}">Weather Search</a>
+    <p> Use the navigation buttons above to explore the site functionality or use the links below to explore the
+      project on GitHub</p>
+    <a class="button" href="https://github.com/tmduddy/django-weather" target="_blank">GitHub</a>
+  </div>
+</div>
+
 {% endblock %}

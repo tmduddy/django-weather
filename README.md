@@ -6,7 +6,7 @@ The end goal of this project is a web application that allows users to find out 
 
 ---
 
-Objectives:
+## Objectives:
 
 - [x] setup local dev workspace
     - `pyenv`, `venv`, `pip install django`
@@ -35,3 +35,25 @@ Objectives:
 - [ ] add basic signin functionality so only authenticated users can submit reports
 
 - [ ] add ability to browse submitted reports (either searches or filters)
+
+---
+
+## Installation
+
+1. Download or clone the repo
+1. Setup a Python (virtual) environment using any version of Python >= 3.7.4 
+    - note, I've only tested this with 3.7.X, 3.8.X, 3.9.X
+1. Update and install all dependencies with
+
+        pip install --U pip && pip install -r requirements.txt
+1. Set up your databases and make all migrations using 
+        
+        python manage.py makemigrations weather
+        python manage.py migrate
+
+    - Optional: create an admin user for yourself using 
+
+            python manage.py createsuperuser
+1. Run the devserver and explore the app using
+        
+        python manage.py runserver

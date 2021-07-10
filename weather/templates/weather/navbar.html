@@ -1,0 +1,15 @@
+{% block navbar %}
+<div class="navbar">
+    <div class="row">
+      <div class="seven columns" style="text-align: left;">
+        <a href="{% url 'weather:index' %}">Home</a>
+      </div>
+      <div class="five columns" style="text-align: right;">
+        <a href="{% url 'weather:search' %}">Weather Search</a>
+        <a href="{% url 'weather:report_weather' %}">Report Weather</a>
+        <a href="{% url 'weather:browse_reports' %}">Browse Reports</a>
+      </div>
+    </div>
+  </div>
+  <br>
+{% endblock navbar %}
