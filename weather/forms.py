@@ -1,4 +1,4 @@
-from django.forms import forms, CharField, TextInput
+from django.forms import forms, CharField, TextInput, ModelForm
 from .models import Report
 
 class ZipCodeSearchForm(forms.Form):
@@ -8,7 +8,7 @@ class CityStateSearchForm(forms.Form):
     city = CharField(max_length=200, widget=TextInput(attrs={'placeholder': 'ex. Annapolis'}))
     state = CharField(label="State Code", max_length=2, widget=TextInput(attrs={'placeholder': 'ex. MD'}))
 
-class ReportForm(forms.Form):
+class ReportForm(ModelForm):
     description = CharField(
         max_length=500,
         required=False

@@ -30,6 +30,8 @@ Objectives:
 
 - [x] set up a data model to hold user submitted weather data 
 
-- [ ] build a basic frontend for user input
+- [x] build a basic frontend for user input
 
 - [ ] add basic signin functionality so only authenticated users can submit reports
+
+- [ ] add ability to browse submitted reports (either searches or filters)

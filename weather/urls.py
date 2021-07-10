@@ -16,5 +16,5 @@ urlpatterns = [
     # /weather/report-weather/
     path('report-weather/', views.ReportWeatherView.as_view(), name='report_weather'),
     # /weather/browse-reports/
-    path('browse_reports', views.BrowseReportsView.as_view(), name='browse_reports')
+    path('browse-reports', views.BrowseReportsView.as_view(), name='browse_reports')
 ]

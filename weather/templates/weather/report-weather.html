@@ -1,9 +1,43 @@
 {% extends 'weather/base.html' %}
 
 {% block headline %}
-Report your local weather.
+<h2>Report your local weather.</h2>
 {% endblock headline %}
 
 {% block content %}
-{{ form }}
+<form action="" method="POST">
+{% csrf_token %}
+    <div class="row">
+        <div class="two columns">&nbsp;</div>
+        <div class="ten columns">
+            <table>
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="form-label">{{ form.city.label }}</td>
+                        <td class="form-input"> {{ form.city }}</td>
+                        <td class="form-label">{{ form.state.label }}</td>
+                        <td class="form-input"> {{ form.state }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form-label">{{ form.zipcode.label }}</td>
+                        <td class="form-input"> {{ form.zipcode }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form-label">{{ form.temperature.label }}</td>
+                        <td class="form-input"> {{ form.temperature }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form-label">{{ form.weather.label }}</td>
+                        <td class="form-input"> {{ form.weather }}</td>
+                        <td class="form-label">{{ form.description.label }}</td>
+                        <td class="form-input"> {{ form.description }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" class="button" value="Submit">
+        </div>
+    </div>
+</form>
 {% endblock content %}

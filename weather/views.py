@@ -1,5 +1,9 @@
 import os
 
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
+from weather.models import Report
+
 import requests
 from django.http import Http404
 from django.shortcuts import redirect, render
@@ -116,7 +120,18 @@ class ReportWeatherView(View):
         context = {
             'form': ReportForm
         }
+
         return render(request, self.template_name, context)
+
+    def post(self, request):
+        report_form = ReportForm(request.POST)
+        report_data = report_form.save(commit=False)
+        
+        # insert any custom processing here if needed #
+
+        report_data.save()
+
+        return redirect('weather:browse_reports')
 
 class BrowseReportsView(View):
     template_name = 'weather/browse-reports.html'
