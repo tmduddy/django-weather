@@ -2,9 +2,11 @@
 
 A quick webapp to practice working with Django.
 
+The end goal of this project is a web application that allows users to find out the current weather conditions anywhere in the U.S. searching by zipcode or city and state.
+
 ---
 
-To Do List:
+Objectives:
 
 - [x] setup local dev workspace
     - `pyenv`, `venv`, `pip install django`
@@ -14,9 +16,9 @@ To Do List:
 
 - [x] create a `weather` app in the project
 
-- [x] create a /zip/ route to allow users to get weather by zip
+- [x] create a /search/zip/ route to allow users to get weather by zip
 
-- [x] create a /city/state/ route to allow users to get weather by city, state
+- [x] create a /search/city/state/ route to allow users to get weather by city, state
 
 - [x] build a basic frontend for users to search from
 

@@ -1,19 +1,17 @@
+import os
+
+import requests
+from django.http import Http404
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, Http404
-from django.views.generic.edit import FormView, View
+from django.views.generic.edit import View
 
-from dotenv import load_dotenv, find_dotenv
-import os, requests
+from .forms import CityStateSearchForm, ZipCodeSearchForm
 
-from .forms import ZipCodeSearchForm, CityStateSearchForm
-
-# Create your views here.
 
 class IndexView(View):
     template_name = 'weather/index.html'
 
     def get(self, request):
-        
         context = {}
         return render(request, 'weather/index.html', context)
 
@@ -30,9 +28,7 @@ class SearchForm(View):
         return render(request, 'weather/search.html', context)
     
     def post(self, request):
-        zip_form = ZipCodeSearchForm(prefix='zip_form')
-        city_state_form = CityStateSearchForm(prefix='city_state_form')
-
+        
         action = self.request.POST.get('action', False)
 
         if action == 'zip_form':
@@ -55,19 +51,22 @@ class DetailView(View):
         state = kwargs.get('state', None)
 
         api_token = os.environ['WEATHER_KEY']
+        
         payload = {
             'appid': api_token,
             'units': 'imperial',
         }
+        
         if zipcode:
             payload['zip'] = f'{zipcode},us'
         elif city and state:
             payload['q'] = f'{city},us-{state}'
         else:
-            return HttpResponse('gotta provide something my man')
+            pass
 
         res = requests.get('http://api.openweathermap.org/data/2.5/weather', payload) 
         status = res.status_code
+        
         if status not in [200, 201, 202]:
             error_text = f"Your call to the OpenWeatherMap API failed with a status of {status}"
             return Http404(error_text)
@@ -81,8 +80,8 @@ class DetailView(View):
         all_temps = weather_data_raw.get('main', {})
         current_temp = all_temps.get('temp', 'unknown')
         feel_temp = all_temps.get('feels_like', 'unknown')
-        high_temp = all_temps.get('temp_min', 'unknown')
-        low_temp = all_temps.get('temp_max', 'unknown')
+        high_temp = all_temps.get('temp_max', 'unknown')
+        low_temp = all_temps.get('temp_min', 'unknown')
         
         weather_data = {
             'city': city,
@@ -95,8 +94,10 @@ class DetailView(View):
         }
 
         header_list = [header.replace('_temp', '').title() for header in weather_data]
+        
         context = {
             'weather_data': weather_data,
             'header_list': header_list
         }
+        
         return render(request, 'weather/detail.html', context)
