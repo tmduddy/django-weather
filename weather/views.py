@@ -12,6 +12,7 @@ class IndexView(View):
     template_name = 'weather/index.html'
 
     def get(self, request):
+        
         context = {}
         return render(request, 'weather/index.html', context)
 
@@ -19,12 +20,15 @@ class SearchForm(View):
     template_name = 'weather/search.html'
 
     def get(self, request):
+        
         zip_form = ZipCodeSearchForm(prefix='zip_form')
         city_state_form = CityStateSearchForm(prefix='city_state_form')
+        
         context = {
             'zip_form': zip_form,
             'city_state_form': city_state_form,
         }
+
         return render(request, 'weather/search.html', context)
     
     def post(self, request):
@@ -46,6 +50,7 @@ class SearchForm(View):
 class DetailView(View):
 
     def get(self, request, **kwargs):
+        
         zipcode = kwargs.get('zipcode', None)
         city = kwargs.get('city', None)
         state = kwargs.get('state', None)

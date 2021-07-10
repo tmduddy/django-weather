@@ -5,4 +5,4 @@ class ZipCodeSearchForm(forms.Form):
 
 class CityStateSearchForm(forms.Form):
     city = CharField(max_length=200, widget=TextInput(attrs={'placeholder': 'ex. Annapolis'}))
-    state = CharField(label="Two Character State Code", max_length=2, widget=TextInput(attrs={'placeholder': 'ex. MD'}))
+    state = CharField(label="State Code", max_length=2, widget=TextInput(attrs={'placeholder': 'ex. MD'}))
