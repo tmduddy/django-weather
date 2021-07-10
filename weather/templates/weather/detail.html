@@ -1,0 +1,30 @@
+{% extends 'weather/base.html' %}
+
+{% block headline %}
+<h2>The weather is in for {{ weather_data.city }}</h2>
+{% endblock headline %}
+
+{% block content %}
+<p>All temperatures in degrees F</p>
+<div class="row">
+  <div class="two columns">&nbsp;</div>
+  <div class="ten columns">
+    <table>
+      <thead>
+        <tr>
+          {% for header in header_list %}
+          <th>{{ header }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% for k,v in weather_data.items %}
+          <td>{{ v }}</td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

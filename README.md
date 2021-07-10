@@ -20,7 +20,7 @@ To Do List:
 
 - [x] build a basic frontend for users to search from
 
-- [ ] build a basic frontend to display the results
+- [x] build a basic frontend to display the results
 
 - [ ] add basic signin functionality
 
