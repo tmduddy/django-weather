@@ -47,27 +47,30 @@ class SearchForm(View):
                 state = city_state_form.cleaned_data['state']
                 return redirect('weather:detail', city, state)
 
-def detail(request, **kwargs):
-    zipcode = kwargs.get('zipcode', None)
-    city = kwargs.get('city', None)
-    state = kwargs.get('state', None)
+class DetailView(View):
 
-    api_token = os.environ['WEATHER_KEY']
-    if zipcode:
-        payload = {
-            'zip': f'{zipcode},us',
-            'appid': api_token
-        }
-    elif city and state:
-        payload = {
-            'q': f'{city},us-{state}',
-            'appid': api_token
-        }
-        print(payload)
-    else:
-        return HttpResponse('gotta provide something my man')
+    def get(self, request, **kwargs):
+        zipcode = kwargs.get('zipcode', None)
+        city = kwargs.get('city', None)
+        state = kwargs.get('state', None)
 
-    res = requests.get('http://api.openweathermap.org/data/2.5/weather', payload) 
-    parsed_res = str(res)
-    status = res.json()
-    return HttpResponse(f'{status}: {parsed_res}')
+        api_token = os.environ['WEATHER_KEY']
+        if zipcode:
+            payload = {
+                'zip': f'{zipcode},us',
+                'appid': api_token
+            }
+        elif city and state:
+            payload = {
+                'q': f'{city},us-{state}',
+                'appid': api_token
+            }
+            print(payload)
+        else:
+            return HttpResponse('gotta provide something my man')
+
+        res = requests.get('http://api.openweathermap.org/data/2.5/weather', payload) 
+        parsed_res = str(res)
+        status = res.json()
+        # return HttpResponse(f'{status}: {parsed_res}')
+        return HttpResponse(status, content_type='application/json')
