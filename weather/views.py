@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.views.generic.edit import View
 
-from .forms import CityStateSearchForm, ZipCodeSearchForm
+from .forms import CityStateSearchForm, ZipCodeSearchForm, ReportForm
 
 
 class IndexView(View):
@@ -113,7 +113,9 @@ class ReportWeatherView(View):
 
     def get(self, request):
 
-        context = {}
+        context = {
+            'form': ReportForm
+        }
         return render(request, self.template_name, context)
 
 class BrowseReportsView(View):

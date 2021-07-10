@@ -28,7 +28,7 @@ Objectives:
 
 - [x] create a /browse-reports/ route to allow users to enter the weather at a location
 
-- [ ] set up a data model to hold user submitted weather data 
+- [x] set up a data model to hold user submitted weather data 
 
 - [ ] build a basic frontend for user input
 
