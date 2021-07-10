@@ -48,6 +48,7 @@ class SearchForm(View):
                 return redirect('weather:detail', city, state)
 
 class DetailView(View):
+    template_name = 'weather/detail.html'
 
     def get(self, request, **kwargs):
         
@@ -105,4 +106,20 @@ class DetailView(View):
             'header_list': header_list
         }
         
-        return render(request, 'weather/detail.html', context)
+        return render(request, self.template_name, context)
+
+class ReportWeatherView(View):
+    template_name = 'weather/report-weather.html'
+
+    def get(self, request):
+
+        context = {}
+        return render(request, self.template_name, context)
+
+class BrowseReportsView(View):
+    template_name = 'weather/browse-reports.html'
+
+    def get(self, request):
+
+        context = {}
+        return render(request, self.template_name, context)

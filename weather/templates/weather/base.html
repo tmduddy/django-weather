@@ -20,8 +20,8 @@
       </div>
       <div class="five columns" style="text-align: right;">
         <a href="{% url 'weather:search' %}">Weather Search</a>
-        <a href="">Report Weather</a>
-        <a href="">Browse Reports</a>
+        <a href="{% url 'weather:report_weather' %}">Report Weather</a>
+        <a href="{% url 'weather:browse_reports' %}">Browse Reports</a>
       </div>
     </div>
   </div>
