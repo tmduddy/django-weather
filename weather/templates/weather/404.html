@@ -1,0 +1,12 @@
+{% extends 'weather/base.html' %}
+
+{% block headline %}
+<h2>No results found</h2>
+{% endblock headline %}
+
+{% block content %}
+<p>Your request for the weather in {{ search_term }} returned no results.</p>
+
+<p>Please return to the Search page and try again with a valid zipcode or city and state</p>
+<a class="button" href="{% url 'weather:search' %}">New Search</a>
+{% endblock content %}

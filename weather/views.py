@@ -1,7 +1,7 @@
 import os
 
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseNotFound
 from weather.models import Report
 
 import requests
@@ -79,7 +79,12 @@ class DetailView(View):
         
         if status not in [200, 201, 202]:
             error_text = f"Your call to the OpenWeatherMap API failed with a status of {status}"
-            return Http404(error_text)
+            search_term = str(zipcode) if zipcode else f'{city}, {state}'
+            context = {
+                "error_text": error_text,
+                "search_term": search_term
+            }
+            return render(request, 'weather/404.html', context)
         
         # map json response to readable output
         weather_data_raw = res.json()
