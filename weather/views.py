@@ -143,5 +143,10 @@ class BrowseReportsView(View):
 
     def get(self, request):
 
-        context = {}
+        all_reports = Report.objects.all().order_by('state', 'city', 'report_date')
+        fields = [str(field).replace('weather.Report.', '').upper() for field in Report._meta.fields]
+        context = {
+            'all_reports': all_reports,
+            'fields': fields,
+        }
         return render(request, self.template_name, context)

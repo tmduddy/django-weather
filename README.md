@@ -32,9 +32,9 @@ The end goal of this project is a web application that allows users to find out 
 
 - [x] build a basic frontend for user input
 
-- [ ] add basic signin functionality so only authenticated users can submit reports
+- [x] add ability to browse submitted reports (either searches or filters)
 
-- [ ] add ability to browse submitted reports (either searches or filters)
+- [ ] add basic signin functionality so only authenticated users can submit reports
 
 ---
 

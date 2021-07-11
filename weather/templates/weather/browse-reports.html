@@ -1,5 +1,40 @@
 {% extends 'weather/base.html' %}
 
 {% block headline %}
-Browse user-submitted weather reports.
+<h3>Browse user-submitted weather reports.</h3>
 {% endblock headline %}
+
+{% block content %}
+<div class="row">
+  <div class="two columns">&nbsp;</div>
+  <div class="ten columns">
+    <table>
+      <thead>
+      <tr>
+        {% for field in fields %}
+          <td>{{field}}</td>
+        {% endfor %}
+      </tr>
+      </thead>
+      <tbody>
+      {% for report in all_reports %}
+      <tr>
+        <td>{{report.id}}</td>
+        <td>{{report.report_date}}</td>
+        <td>{{report.temperature}}</td>
+        <td>{{report.city}}</td>
+        <td>{{report.state}}</td>
+        <td>{{report.zipcode}}</td>
+        <td>{{report.weather}}</td>
+        <td>{{report.description}}</td>
+        <td>{{report.upvotes}}</td>
+        <td>{{report.downvotes}}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+{% endblock content %}
