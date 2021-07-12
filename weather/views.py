@@ -1,15 +1,16 @@
 import os
-
-from django.http.request import HttpRequest
-from django.http.response import HttpResponse, HttpResponseNotFound
-from weather.models import Report
+from urllib.parse import urlencode
 
 import requests
 from django.http import Http404
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render
 from django.views.generic.edit import View
 
-from .forms import CityStateSearchForm, ZipCodeSearchForm, ReportForm
+from weather.models import Report
+
+from .forms import CityStateSearchForm, ReportForm, ZipCodeSearchForm
 
 
 class IndexView(View):
@@ -130,20 +131,39 @@ class ReportWeatherView(View):
 
     def post(self, request):
         report_form = ReportForm(request.POST)
+        
+        # using the commit=False flag to hold off on sending the 
+        # data to the db in case i need to add custom processing
         report_data = report_form.save(commit=False)
         
-        # insert any custom processing here if needed #
-
+        # calling .save() here sends the record to the db
         report_data.save()
 
-        return redirect('weather:browse_reports')
+
+        # using a dict and urllib.urlencode to generate query strings
+        # on redirect without defining them explictly in URLConf
+        response = redirect('weather:browse_reports')
+        params = {
+            'pk': report_data.id
+        }
+        query_params = urlencode(params)
+
+        response['Location'] += f'?{query_params}'
+
+        return response
 
 class BrowseReportsView(View):
     template_name = 'weather/browse-reports.html'
 
     def get(self, request):
 
-        all_reports = Report.objects.all().order_by('state', 'city', 'report_date')
+        query_string_pk = request.GET.get('pk', None)
+        
+        if query_string_pk:
+            all_reports = Report.objects.filter(pk=query_string_pk)
+        else:
+            all_reports = Report.objects.all().order_by('state', 'city', 'report_date')
+        
         fields = [str(field).replace('weather.Report.', '').upper() for field in Report._meta.fields]
         context = {
             'all_reports': all_reports,
