@@ -6,10 +6,11 @@ The end goal of this project is a web application that allows users to find out 
 
 ---
 
-## Objectives:
+## Objectives
 
 - [x] setup local dev workspace
-    - `pyenv`, `venv`, `pip install django`
+
+      `pyenv`, `venv`, `pip install django`
 - [x] initialize git repo
 
 - [x] commit empty django project
@@ -28,7 +29,7 @@ The end goal of this project is a web application that allows users to find out 
 
 - [x] create a /browse-reports/ route to allow users to enter the weather at a location
 
-- [x] set up a data model to hold user submitted weather data 
+- [x] set up a data model to hold user submitted weather data
 
 - [x] build a basic frontend for user input
 
@@ -41,19 +42,20 @@ The end goal of this project is a web application that allows users to find out 
 ## Installation
 
 1. Download or clone the repo
-1. Setup a Python (virtual) environment using any version of Python >= 3.7.4 
-    - note, I've only tested this with 3.7.X, 3.8.X, 3.9.X
+1. Setup a Python (virtual) environment using any version of Python >= `3.7.4`
+    - note, I've only tested this with `3.7.X`, `3.8.X`, `3.9.X`
 1. Update and install all dependencies with
 
         pip install --U pip && pip install -r requirements.txt
-1. Set up your databases and make all migrations using 
-        
+
+1. Set up your databases and make all migrations using
+
         python manage.py makemigrations weather
-        python manage.py migrate
+      python manage.py migrate
 
-    - Optional: create an admin user for yourself using 
+    - Optional: create an admin user for yourself using
 
-            python manage.py createsuperuser
+          python manage.py createsuperuser
 1. Run the devserver and explore the app using
-        
+
         python manage.py runserver
