@@ -6,8 +6,11 @@
 
 {% block content %}
 <div class="row">
-  <div class="two columns">&nbsp;</div>
-  <div class="ten columns">
+  <div class="two columns">
+    <a href="{% url 'weather:browse_reports' %}" class="button">View today's reports.</a>
+  </div>
+  <div class="one columns">&nbsp;</div>
+  <div class="nine columns">
     <table>
       <thead>
       <tr>
@@ -19,7 +22,6 @@
       <tbody>
       {% for report in all_reports %}
       <tr>
-        <td>{{report.id}}</td>
         <td>{{report.report_date}}</td>
         <td>{{report.temperature}}</td>
         <td>{{report.city}}</td>

@@ -638,3 +638,15 @@ hr {
 .form-input {
   text-align: left;
 }
+
+/* Dark Mode Settings
+-------------------------------------------------- */
+.dark-mode-off {
+  background-color: transparent;
+  filter: invert(0%);
+}
+  
+.dark-mode-on {
+  background-color:rgb(0, 0, 0);
+  filter: invert(100%)
+}

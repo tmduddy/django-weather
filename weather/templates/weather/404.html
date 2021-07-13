@@ -8,5 +8,6 @@
 <p>Your request for the weather in {{ search_term }} returned no results.</p>
 
 <p>Please return to the Search page and try again with a valid zipcode or city and state</p>
+<p>Error Text: {{ error_text }}</p> 
 <a class="button" href="{% url 'weather:search' %}">New Search</a>
 {% endblock content %}

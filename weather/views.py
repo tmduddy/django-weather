@@ -8,9 +8,11 @@ from django.http.response import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render
 from django.views.generic.edit import View
 
+import weather.helper as helper
+
 from weather.models import Report
 
-from .forms import CityStateSearchForm, ReportForm, ZipCodeSearchForm
+from weather.forms import CityStateSearchForm, ReportForm, ZipCodeSearchForm
 
 
 class IndexView(View):
@@ -38,7 +40,7 @@ class SearchForm(View):
     
     def post(self, request):
         
-        action = self.request.POST.get('action', False)
+        action = self.request.POST.get('action')
 
         if action == 'zip_form':
             zip_form = ZipCodeSearchForm(request.POST, prefix='zip_form')
@@ -57,16 +59,11 @@ class DetailView(View):
 
     def get(self, request, **kwargs):
         
-        zipcode = kwargs.get('zipcode', None)
-        city = kwargs.get('city', None)
-        state = kwargs.get('state', None)
-
-        api_token = os.environ['WEATHER_KEY']
+        zipcode = kwargs.get('zipcode')
+        city = kwargs.get('city')
+        state = kwargs.get('state')
         
-        payload = {
-            'appid': api_token,
-            'units': 'imperial',
-        }
+        payload = {}
         
         if zipcode:
             payload['zip'] = f'{zipcode},us'
@@ -75,8 +72,9 @@ class DetailView(View):
         else:
             pass
 
-        res = requests.get('http://api.openweathermap.org/data/2.5/weather', payload) 
-        status = res.status_code
+        weather_data = helper.get_raw_weather_data(payload)
+        weather_data_raw = weather_data.get('response')
+        status = weather_data.get('status')
         
         if status not in [200, 201, 202]:
             error_text = f"Your call to the OpenWeatherMap API failed with a status of {status}"
@@ -88,7 +86,6 @@ class DetailView(View):
             return render(request, 'weather/404.html', context)
         
         # map json response to readable output
-        weather_data_raw = res.json()
         city = weather_data_raw.get('name', 'unknown')
         all_weather = weather_data_raw.get('weather', [{}])[0]
         weather = all_weather.get('main', 'unknown')
@@ -157,14 +154,13 @@ class BrowseReportsView(View):
 
     def get(self, request):
 
-        query_string_pk = request.GET.get('pk', None)
+        query_string_pk = request.GET.get('pk')
         
         if query_string_pk:
             all_reports = Report.objects.filter(pk=query_string_pk)
         else:
             all_reports = Report.objects.all().order_by('state', 'city', 'report_date')
-        
-        fields = [str(field).replace('weather.Report.', '').upper() for field in Report._meta.fields]
+        fields = [str(field).replace('weather.Report.', '').upper() for field in Report._meta.fields if str(field) != "weather.Report.id"]
         context = {
             'all_reports': all_reports,
             'fields': fields,
