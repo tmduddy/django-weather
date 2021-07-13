@@ -7,8 +7,13 @@ from .forms import LoginForm
 
 
 # using FBV first but plan to move to CBV
-def user_login(request):
-  if request.method == 'POST':
+
+
+# # Create your views here.
+class LoginView(View):
+  template_name = 'account/login.html'
+
+  def post(self, request):
     form = LoginForm(request.POST)
     if form.is_valid():
       cd = form.cleaned_data
@@ -22,17 +27,14 @@ def user_login(request):
           return HttpResponse('Disabled account.')
       else:
         return HttpResponse('Invalid login.')
-    else:
-      form = LoginForm()
+  
+  def get(self, request):
+    form = LoginForm()
     
     context = {
       'form': form
     }
-    return render(request, 'account/login.html', context)
-
-# # Create your views here.
-# class LoginView(View):
-#   pass
+    return render(request, self.template_name, context)
 
 # class LogoutView(View):
 #   pass
