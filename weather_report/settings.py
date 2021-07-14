@@ -105,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# login redirection handling
+LOGIN_REDIRECT_URL = 'weather'
+LOGIN_URL = 'account/login'
+LOGOUT_URL = 'account/logout'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

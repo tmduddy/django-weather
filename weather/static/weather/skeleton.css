@@ -615,11 +615,15 @@ hr {
 
 /*Floats each item to the left with padding of 14 & 16 px.*/
 .navbar a {
-  float: left;
+  float: right;
   color: grey;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+}
+
+.logo a {
+  float: left;
 }
 
 /*Background color change during hover state*/
