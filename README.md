@@ -35,7 +35,13 @@ The end goal of this project is a web application that allows users to find out 
 
 - [x] add ability to browse submitted reports (either searches or filters)
 
-- [ ] add basic signin functionality so only authenticated users can submit reports
+- [x] add basic signin functionality so only authenticated users can submit reports
+
+- [ ] add additional report filtering
+
+- [ ] add user attribute to data submissions
+
+- [ ] migrate to GCP hosting
 
 ---
 

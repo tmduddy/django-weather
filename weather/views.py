@@ -1,13 +1,13 @@
-import os
 from urllib.parse import urlencode
 
-import requests
 from django.http import Http404
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render
 from django.views.generic.edit import View
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.urls import reverse
 import weather.helper as helper
 
 from weather.models import Report
@@ -115,8 +115,9 @@ class DetailView(View):
         
         return render(request, self.template_name, context)
 
-class ReportWeatherView(View):
+class ReportWeatherView(LoginRequiredMixin, View):
     template_name = 'weather/report-weather.html'
+    login_url = 'account:login'
 
     def get(self, request):
 
