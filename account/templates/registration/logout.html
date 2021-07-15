@@ -7,9 +7,13 @@
 {% endblock headline %}
 
 {% block content %}
-<p>
-  You have been successfully logged out.
-  You can <a href="{% url 'account:login' %}">login again</a>.
-</p>
+<div class="row">
+  <div class="two columns">&nbsp;</div>
+  <div class="ten columns">
+    <p>You have been successfully logged out.</p>
+    <a class="button" href="{% url 'account:login' %}">Login again</a>
+    <br>
+    <a class="button" href="{% url 'weather:index' %}">Home</a>
+  </div>
+</div>
 {% endblock content %}
-

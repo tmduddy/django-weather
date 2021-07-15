@@ -159,7 +159,7 @@ class BrowseReportsView(View):
         query_string_pk = request.GET.get('pk')
         query_string_today = request.GET.get('today')
 
-        order_by_text = ['state', 'city', 'report_date']
+        order_by_text = ['-report_date', 'state', 'city']
         
         if query_string_pk:
             all_reports = Report.objects.filter(pk=query_string_pk).order_by(*order_by_text)
