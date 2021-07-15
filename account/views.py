@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import View
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from .forms import LoginForm
 
@@ -36,8 +36,16 @@ class LoginView(View):
     }
     return render(request, self.template_name, context)
 
-# class LogoutView(View):
-#   pass
+class LogoutView(View):
+  template_name = 'registration/logout.html'
+
+  def get(self, request):
+    logout(request)
+    return render(request, self.template_name)
+
+  def post(self, request):
+    logout(request)
+    return render(request, self.template_name)
 
 # class RegisterView(View):
 #   pass

@@ -6,10 +6,11 @@
 
 {% block content %}
 <div class="row">
-  <div class="two columns">
-    <a href="{% url 'weather:browse_reports' %}" class="button">View today's reports.</a>
+  <div class="three columns">
+    <a href="{% url 'weather:browse_reports' %}?today=True" class="button u-full-width">View today's reports</a>
+    <a href="{% url 'weather:browse_reports' %}" class="button u-full-width">View all reports</a>
   </div>
-  <div class="one columns">&nbsp;</div>
+  {% comment %} <div class="one columns">&nbsp;</div> {% endcomment %}
   <div class="nine columns">
     <table>
       <thead>

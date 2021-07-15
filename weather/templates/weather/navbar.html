@@ -6,7 +6,12 @@
       </div>
       <div class="eleven columns">
         <a href="#" onclick="darkModeSwap()">Toggle Dark Mode</a>
-        <a href="{% url 'account:login' %}">Login/Register</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'account:logout' %}">Logout</a>
+        {% else %}
+          <a href="{% url 'account:login' %}">Login</a>
+        {% endif %}
+        
         <a href="{% url 'weather:browse_reports' %}">Browse Reports</a>
         <a href="{% url 'weather:report_weather' %}">Report Weather</a>
         <a href="{% url 'weather:search' %}">Weather Search</a>

@@ -1,9 +1,12 @@
-{% extends 'accounts/base.html' %}
+{% extends 'weather/base.html' %}
 
 {% block title %}Logged out.{% endblock title %}following
 
-{% block content %}
+{% block headline %}
 <h1>Logged out.</h1>
+{% endblock headline %}
+
+{% block content %}
 <p>
   You have been successfully logged out.
   You can <a href="{% url 'account:login' %}">login again</a>.

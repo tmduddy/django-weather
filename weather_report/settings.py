@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # login redirection handling
-LOGIN_REDIRECT_URL = 'weather'
+LOGIN_REDIRECT_URL = '/weather'
 LOGIN_URL = 'account/login'
 LOGOUT_URL = 'account/logout'
 

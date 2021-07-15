@@ -8,6 +8,7 @@ from django.views.generic.edit import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.urls import reverse
+from django.utils import timezone
 import weather.helper as helper
 
 from weather.models import Report
@@ -156,11 +157,16 @@ class BrowseReportsView(View):
     def get(self, request):
 
         query_string_pk = request.GET.get('pk')
+        query_string_today = request.GET.get('today')
         
         if query_string_pk:
             all_reports = Report.objects.filter(pk=query_string_pk)
+        elif query_string_today:
+            all_reports = Report.objects.filter(report_date__day=timezone.now().day)
         else:
-            all_reports = Report.objects.all().order_by('state', 'city', 'report_date')
+            all_reports = Report.objects.all()
+
+        all_reports = all_reports.order_by('state', 'city', 'report_date')
         fields = [str(field).replace('weather.Report.', '').upper() for field in Report._meta.fields if str(field) != "weather.Report.id"]
         context = {
             'all_reports': all_reports,
