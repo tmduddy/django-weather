@@ -12,7 +12,7 @@
   <title>{% block title %}Weather App{% endblock %}</title>
 </head>
 
-<body class="dark-mode-on">
+<body onload="assignDarkMode()">
   {% block navbar %}
   {% include 'weather/navbar.html' %}
   {% endblock navbar %}

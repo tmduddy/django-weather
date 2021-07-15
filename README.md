@@ -41,7 +41,7 @@ The end goal of this project is a web application that allows users to find out 
 
 - [ ] add user attribute to data submissions
 
-- [ ] migrate to GCP hosting
+- [ ] migrate to GCP hosting?
 
 ---
 

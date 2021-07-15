@@ -1,11 +1,30 @@
+const getCookieValue = (name) => (
+  document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop()
+)
+
+function assignDarkMode() {
+  const fullPage = document.querySelector('body');
+  const dark_mode_preference = getCookieValue('dark_mode') || 'dark-mode-on';
+  console.log('cookie value onLoad: ' + getCookieValue('dark_mode'))
+
+  fullPage.setAttribute('class', dark_mode_preference)
+
+  
+}
+
 function darkModeSwap() {
 
   const fullPage = document.querySelector('body');
 
-  const existing_class = fullPage.getAttribute('class');
+  const existing_class = fullPage.getAttribute('class') || '';
+
   if (existing_class.includes('dark-mode-off')) {
-    fullPage.setAttribute('class', existing_class.replace('dark-mode-off', 'dark-mode-on'));
+    document.cookie = 'dark_mode=dark-mode-on; path=/';
+    fullPage.setAttribute('class', 'dark-mode-on');
   } else {
-    fullPage.setAttribute('class', existing_class.replace('dark-mode-on', 'dark-mode-off'));
+    document.cookie = 'dark_mode=dark-mode-off; path=/';
+    fullPage.setAttribute('class', 'dark-mode-off');
   }
+
+  console.log('cookie value onClick ' + getCookieValue('dark_mode'))
 }

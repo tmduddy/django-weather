@@ -158,15 +158,16 @@ class BrowseReportsView(View):
 
         query_string_pk = request.GET.get('pk')
         query_string_today = request.GET.get('today')
+
+        order_by_text = ['state', 'city', 'report_date']
         
         if query_string_pk:
-            all_reports = Report.objects.filter(pk=query_string_pk)
+            all_reports = Report.objects.filter(pk=query_string_pk).order_by(*order_by_text)
         elif query_string_today:
-            all_reports = Report.objects.filter(report_date__day=timezone.now().day)
+            all_reports = Report.objects.filter(report_date__day=timezone.now().day).order_by(*order_by_text)
         else:
-            all_reports = Report.objects.all()
+            all_reports = Report.objects.all().order_by(*order_by_text)[:10]
 
-        all_reports = all_reports.order_by('state', 'city', 'report_date')
         fields = [str(field).replace('weather.Report.', '').upper() for field in Report._meta.fields if str(field) != "weather.Report.id"]
         context = {
             'all_reports': all_reports,
